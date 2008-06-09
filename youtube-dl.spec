@@ -1,7 +1,7 @@
 Summary:	Video extraction utility for YouTube
 Summary(pl.UTF-8):	Narzędzie do wydobywania filmów z YouTube
 Name:		youtube-dl
-Version:	20080420
+Version:	20080630
 Release:	1
 License:	MIT
 Group:		Applications/System
@@ -23,8 +23,6 @@ YouTube.com.
 youtube-dl jest programem do ściągania plików video z YouTube.com.
 
 %prep
-
-%build
 
 %install
 rm -rf $RPM_BUILD_ROOT
