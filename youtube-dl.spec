@@ -1,12 +1,12 @@
 Summary:	Video extraction utility for YouTube
 Summary(pl.UTF-8):	Narzędzie do wydobywania filmów z YouTube
 Name:		youtube-dl
-Version:	20080726
+Version:	20080809
 Release:	1
 License:	MIT
 Group:		Applications/System
 Source0:	http://www.arrakis.es/~rggi3/%{name}/youtube-dl
-# Source0-md5:	71d4a61c648e173cc093105b80760e05
+# Source0-md5:	9a6420a47218e05c7961c91f93965fca
 URL:		http://www.arrakis.es/~rggi3/youtube-dl/
 BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.219
