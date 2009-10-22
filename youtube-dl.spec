@@ -1,7 +1,7 @@
 Summary:	Video extraction utility for YouTube
 Summary(pl.UTF-8):	Narzędzie do wydobywania filmów z YouTube
 Name:		youtube-dl
-Version:	20090808
+Version:	20090913
 Release:	1
 License:	MIT, Public Domain
 Group:		Applications/System
