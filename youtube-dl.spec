@@ -5,7 +5,7 @@ Version:	20120927
 Release:	1
 License:	Public Domain
 Group:		Applications/System
-Source0:	https://github.com/rg3/%{name}/raw/2012.09.27/youtube-dl
+Source0:	https://github.com/rg3/youtube-dl/raw/2012.09.27/youtube-dl
 # Source0-md5:	b581c339555f66df4e213ececce37a11
 URL:		http://rg3.github.com/youtube-dl/
 BuildRequires:	rpm-pythonprov
