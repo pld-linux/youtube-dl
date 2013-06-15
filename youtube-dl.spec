@@ -23,6 +23,19 @@ YouTube.com.
 %description -l pl.UTF-8
 youtube-dl jest programem do ściągania plików video z YouTube.com.
 
+%package -n bash-completion-%{name}
+Summary:	Bash completion for youtube-dl command
+Summary(pl.UTF-8):	Bashowe dopełnianie parametrów polecenia youtube-dl
+Group:		Applications/Shells
+Requires:	%{name} = %{version}-%{release}
+Requires:	bash-completion
+
+%description -n bash-completion-%{name}
+Bash completion for youtube-dl command.
+
+%description -n bash-completion-%{name} -l pl.UTF-8
+Bashowe dopełnianie parametrów polecenia youtube-dl.
+
 %prep
 %setup -qc
 mv %{name} .tmp; mv .tmp/* .
@@ -40,6 +53,8 @@ install -d $RPM_BUILD_ROOT%{_bindir}
 
 %py_postclean
 
+install -d $RPM_BUILD_ROOT/etc
+%{__mv} -f $RPM_BUILD_ROOT%{_prefix}/etc/bash_completion.d $RPM_BUILD_ROOT/etc
 %{__rm} -r $RPM_BUILD_ROOT%{_docdir}/youtube_dl
 
 %clean
@@ -52,3 +67,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man1/youtube-dl.1*
 %{py_sitescriptdir}/youtube_dl
 %{py_sitescriptdir}/youtube_dl-%{ver}-py*.egg-info
+
+%files -n bash-completion-%{name}
+%defattr(644,root,root,755)
+/etc/bash_completion.d/youtube-dl.bash-completion
