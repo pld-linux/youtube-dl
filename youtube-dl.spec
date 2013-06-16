@@ -1,5 +1,3 @@
-# TODO
-# - bash-completions subpackage
 %define	ver	2013.05.23
 Summary:	Video extraction utility for YouTube
 Summary(pl.UTF-8):	Narzędzie do wydobywania filmów z YouTube
@@ -16,6 +14,8 @@ BuildRequires:	rpmbuild(macros) >= 1.219
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
+%define		bash_compdir	%{_datadir}/bash-completion/completions
+
 %description
 youtube-dl is a small command-line program to download videos from
 YouTube.com.
@@ -28,7 +28,7 @@ Summary:	Bash completion for youtube-dl command
 Summary(pl.UTF-8):	Bashowe dopełnianie parametrów polecenia youtube-dl
 Group:		Applications/Shells
 Requires:	%{name} = %{version}-%{release}
-Requires:	bash-completion
+Requires:	bash-completion >= 2.0
 
 %description -n bash-completion-%{name}
 Bash completion for youtube-dl command.
@@ -53,8 +53,9 @@ install -d $RPM_BUILD_ROOT%{_bindir}
 
 %py_postclean
 
-install -d $RPM_BUILD_ROOT/etc
-%{__mv} -f $RPM_BUILD_ROOT%{_prefix}/etc/bash_completion.d $RPM_BUILD_ROOT/etc
+install -d $RPM_BUILD_ROOT%{bash_compdir}
+%{__mv} $RPM_BUILD_ROOT%{_prefix}/etc/bash_completion.d/youtube-dl.bash-completion \
+	$RPM_BUILD_ROOT%{bash_compdir}/%{name}
 %{__rm} -r $RPM_BUILD_ROOT%{_docdir}/youtube_dl
 
 %clean
@@ -70,4 +71,4 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -n bash-completion-%{name}
 %defattr(644,root,root,755)
-/etc/bash_completion.d/youtube-dl.bash-completion
+%{bash_compdir}/%{name}
