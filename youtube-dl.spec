@@ -9,6 +9,7 @@ Group:		Applications/System
 Source0:	http://youtube-dl.org/downloads/%{ver}/%{name}-%{ver}.tar.gz
 # Source0-md5:	6cb4ee904456d102d4f3edb68272ca50
 URL:		http://youtube-dl.org/
+BuildRequires:	python-distribute
 BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.219
 BuildArch:	noarch
