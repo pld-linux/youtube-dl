@@ -4,6 +4,7 @@ Summary(pl.UTF-8):	Narzędzie do wydobywania filmów z YouTube
 Name:		youtube-dl
 Version:	%(echo %{ver} | tr -d .)
 Release:	1
+Epoch:		1
 License:	Public Domain
 Group:		Applications/System
 Source0:	http://youtube-dl.org/downloads/%{ver}/%{name}-%{ver}.tar.gz
@@ -12,6 +13,7 @@ URL:		http://youtube-dl.org/
 BuildRequires:	python-distribute
 BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.219
+Requires:	python-distribute
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
