@@ -3,7 +3,7 @@ Summary:	Video extraction utility for YouTube
 Summary(pl.UTF-8):	Narzędzie do wydobywania filmów z YouTube
 Name:		youtube-dl
 Version:	%(echo %{ver} | tr -d .)
-Release:	1
+Release:	2
 Epoch:		1
 License:	Public Domain
 Group:		Applications/System
@@ -30,7 +30,7 @@ youtube-dl jest programem do ściągania plików video z YouTube.com.
 Summary:	Bash completion for youtube-dl command
 Summary(pl.UTF-8):	Bashowe dopełnianie parametrów polecenia youtube-dl
 Group:		Applications/Shells
-Requires:	%{name} = %{version}-%{release}
+Requires:	%{name} = %{epoch}:%{version}-%{release}
 Requires:	bash-completion >= 2.0
 
 %description -n bash-completion-%{name}
