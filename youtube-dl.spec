@@ -1,14 +1,14 @@
-%define	ver	2014.01.23.4
+%define	ver	2014.08.21.3
 Summary:	Video extraction utility for YouTube
 Summary(pl.UTF-8):	Narzędzie do wydobywania filmów z YouTube
 Name:		youtube-dl
 Version:	%(echo %{ver} | tr -d .)
-Release:	2
+Release:	1
 Epoch:		1
 License:	Public Domain
 Group:		Applications/System
 Source0:	http://youtube-dl.org/downloads/%{ver}/%{name}-%{ver}.tar.gz
-# Source0-md5:	d9e89ffc9ff572317151e22cac4b3a00
+# Source0-md5:	1b4e8b2ba127f61c551345f85ea2014b
 URL:		http://youtube-dl.org/
 BuildRequires:	python-distribute
 BuildRequires:	rpm-pythonprov
@@ -66,7 +66,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc CHANGELOG README.md LICENSE
+%doc README.md LICENSE
 %attr(755,root,root) %{_bindir}/youtube-dl
 %{_mandir}/man1/youtube-dl.1*
 %{py_sitescriptdir}/youtube_dl
