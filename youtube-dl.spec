@@ -1,13 +1,17 @@
-%define	ver	2014.09.12
+# keep date only for rpm versioning, extra numbers go into release
+%define	ver	20140912
+# full version number as seen on youtube-dl website
+%define	verlong	2014.09.12
+#
 Summary:	Video extraction utility for YouTube
 Summary(pl.UTF-8):	Narzędzie do wydobywania filmów z YouTube
 Name:		youtube-dl
-Version:	%(echo %{ver} | tr -d .)
+Version:	%{ver}
 Release:	1
-Epoch:		1
+Epoch:		2
 License:	Public Domain
 Group:		Applications/System
-Source0:	http://youtube-dl.org/downloads/%{ver}/%{name}-%{ver}.tar.gz
+Source0:	http://youtube-dl.org/downloads/%{verlong}/%{name}-%{verlong}.tar.gz
 # Source0-md5:	e23dc65274fd063710be77b1ec8a5675
 URL:		http://youtube-dl.org/
 BuildRequires:	python-distribute
@@ -70,7 +74,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/youtube-dl
 %{_mandir}/man1/youtube-dl.1*
 %{py_sitescriptdir}/youtube_dl
-%{py_sitescriptdir}/youtube_dl-%{ver}-py*.egg-info
+%{py_sitescriptdir}/youtube_dl-%{verlong}-py*.egg-info
 
 %files -n bash-completion-%{name}
 %defattr(644,root,root,755)
