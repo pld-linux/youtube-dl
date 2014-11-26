@@ -1,7 +1,7 @@
 # keep date only for rpm versioning, extra numbers go into release
-%define	ver	20140912
+%define	ver	20141126
 # full version number as seen on youtube-dl website
-%define	verlong	2014.09.12
+%define	verlong	2014.11.26
 #
 Summary:	Video extraction utility for YouTube
 Summary(pl.UTF-8):	Narzędzie do wydobywania filmów z YouTube
@@ -12,7 +12,7 @@ Epoch:		2
 License:	Public Domain
 Group:		Applications/System
 Source0:	http://youtube-dl.org/downloads/%{verlong}/%{name}-%{verlong}.tar.gz
-# Source0-md5:	e23dc65274fd063710be77b1ec8a5675
+# Source0-md5:	204bd61a81d8ee98d88d9f6d5c2739dc
 URL:		http://youtube-dl.org/
 BuildRequires:	python-distribute
 BuildRequires:	rpm-pythonprov
@@ -22,6 +22,7 @@ BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		bash_compdir	%{_datadir}/bash-completion/completions
+%define		fish_compdir	%{_datadir}/fish/completions
 
 %description
 youtube-dl is a small command-line program to download videos from
@@ -43,6 +44,19 @@ Bash completion for youtube-dl command.
 %description -n bash-completion-%{name} -l pl.UTF-8
 Bashowe dopełnianie parametrów polecenia youtube-dl.
 
+%package -n fish-completion-%{name}
+Summary:	Fish completion for youtube-dl command
+Summary(pl.UTF-8):	Dopełnianie parametrów w fish dla polecenia youtube-dl
+Group:		Applications/Shells
+Requires:	%{name} = %{epoch}:%{version}-%{release}
+Requires:	fish
+
+%description -n fish-completion-%{name}
+Fish completion for youtube-dl command.
+
+%description -n fish-completion-%{name} -l pl.UTF-8
+Dopełnianie parametrów w fish dla polecenia youtube-dl.
+
 %prep
 %setup -qc
 mv %{name} .tmp; mv .tmp/* .
@@ -60,9 +74,11 @@ install -d $RPM_BUILD_ROOT%{_bindir}
 
 %py_postclean
 
-install -d $RPM_BUILD_ROOT%{bash_compdir}
+install -d $RPM_BUILD_ROOT{%{bash_compdir},%{fish_compdir}}
 %{__mv} $RPM_BUILD_ROOT%{_prefix}/etc/bash_completion.d/youtube-dl.bash-completion \
 	$RPM_BUILD_ROOT%{bash_compdir}/%{name}
+%{__mv} $RPM_BUILD_ROOT%{_prefix}/etc/fish/completions/youtube-dl.fish \
+	$RPM_BUILD_ROOT%{fish_compdir}/%{name}.fish
 %{__rm} -r $RPM_BUILD_ROOT%{_docdir}/youtube_dl
 
 %clean
@@ -79,3 +95,7 @@ rm -rf $RPM_BUILD_ROOT
 %files -n bash-completion-%{name}
 %defattr(644,root,root,755)
 %{bash_compdir}/%{name}
+
+%files -n fish-completion-%{name}
+%defattr(644,root,root,755)
+%{fish_compdir}/%{name}.fish
