@@ -1,7 +1,7 @@
 # keep date only for rpm versioning, extra numbers go into release
-%define	ver	20141126
+%define	ver	20150228
 # full version number as seen on youtube-dl website
-%define	verlong	2014.11.26
+%define	verlong	2015.02.28
 #
 Summary:	Video extraction utility for YouTube
 Summary(pl.UTF-8):	Narzędzie do wydobywania filmów z YouTube
@@ -12,7 +12,7 @@ Epoch:		2
 License:	Public Domain
 Group:		Applications/System
 Source0:	http://youtube-dl.org/downloads/%{verlong}/%{name}-%{verlong}.tar.gz
-# Source0-md5:	204bd61a81d8ee98d88d9f6d5c2739dc
+# Source0-md5:	c7fcf8c9e7d3bec7ebc9ddf96a7d925b
 URL:		http://youtube-dl.org/
 BuildRequires:	python-distribute
 BuildRequires:	rpm-pythonprov
