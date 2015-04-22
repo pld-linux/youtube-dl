@@ -2,7 +2,6 @@
 %define	ver	20150228
 # full version number as seen on youtube-dl website
 %define	verlong	2015.02.28
-#
 Summary:	Video extraction utility for YouTube
 Summary(pl.UTF-8):	Narzędzie do wydobywania filmów z YouTube
 Name:		youtube-dl
@@ -13,6 +12,7 @@ License:	Public Domain
 Group:		Applications/System
 Source0:	http://youtube-dl.org/downloads/%{verlong}/%{name}-%{verlong}.tar.gz
 # Source0-md5:	c7fcf8c9e7d3bec7ebc9ddf96a7d925b
+Source1:	%{name}.conf
 URL:		http://youtube-dl.org/
 BuildRequires:	python-distribute
 BuildRequires:	rpm-pythonprov
@@ -75,6 +75,9 @@ install -d $RPM_BUILD_ROOT%{_bindir}
 
 %py_postclean
 
+install -d $RPM_BUILD_ROOT%{_sysconfdir}
+cp -p %{SOURCE1} $RPM_BUILD_ROOT%{_sysconfdir}
+
 install -d $RPM_BUILD_ROOT{%{bash_compdir},%{fish_compdir}}
 %{__mv} $RPM_BUILD_ROOT%{_prefix}/etc/bash_completion.d/youtube-dl.bash-completion \
 	$RPM_BUILD_ROOT%{bash_compdir}/%{name}
@@ -88,10 +91,11 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc README.md LICENSE
+%config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/youtube-dl.conf
 %attr(755,root,root) %{_bindir}/youtube-dl
 %{_mandir}/man1/youtube-dl.1*
 %{py_sitescriptdir}/youtube_dl
-%{py_sitescriptdir}/youtube_dl-%{verlong}-py*.egg-info
+%{py_sitescriptdir}/youtube_dl-*-py*.egg-info
 
 %files -n bash-completion-%{name}
 %defattr(644,root,root,755)
