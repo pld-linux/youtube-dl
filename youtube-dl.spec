@@ -1,7 +1,12 @@
-# keep date only for rpm versioning, extra numbers go into release
-%define	ver	20150228
 # full version number as seen on youtube-dl website
 %define	verlong	2015.02.28
+
+# transform version so we don't have to bump epoch after four digit upgrades:
+# 2013.01.17.1 becomes 20130117_1
+# 2013.01.28   becomes 20130128
+# $ rpmvercmp 20130117_1 20130128
+# 20130117_1 < 20130128
+%define	ver	%(echo %{verlong} | awk -F. 'NF == 3 {printf("%d%d%d", $1, $2, $3)} NF == 4 {printf("%d%d%d_%d", $1, $2, $3, $4)}')
 Summary:	Video extraction utility for YouTube
 Summary(pl.UTF-8):	Narzędzie do wydobywania filmów z YouTube
 Name:		youtube-dl
