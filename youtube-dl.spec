@@ -6,7 +6,7 @@
 # 2013.01.28   becomes 20130128
 # $ rpmvercmp 20130117_1 20130128
 # 20130117_1 < 20130128
-%define	ver	%(echo %{verlong} | awk -F. 'NF == 3 {printf("%d%d%d", $1, $2, $3)} NF == 4 {printf("%d%d%d_%d", $1, $2, $3, $4)}')
+%define	ver	%(echo %{verlong} | awk -F. 'NF == 3 {printf("%s%s%s", $1, $2, $3)} NF == 4 {printf("%s%s%s_%s", $1, $2, $3, $4)}')
 Summary:	Video extraction utility for YouTube
 Summary(pl.UTF-8):	Narzędzie do wydobywania filmów z YouTube
 Name:		youtube-dl
