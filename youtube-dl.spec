@@ -22,8 +22,7 @@ URL:		http://youtube-dl.org/
 BuildRequires:	python-setuptools
 BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.219
-BuildConflicts:	python-distribute
-Requires:	python-distribute
+BuildConflicts:	python-distribute < 0.7
 Requires:	python-pyxattr >= 0.5.0
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
