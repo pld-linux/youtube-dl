@@ -1,5 +1,5 @@
 # full version number as seen on youtube-dl website
-%define	verlong	2015.04.17
+%define	verlong	2015.06.15
 
 # transform version so we don't have to bump epoch after four digit upgrades:
 # 2013.01.17.1 becomes 20130117_1
@@ -11,18 +11,17 @@ Summary:	Video extraction utility for YouTube
 Summary(pl.UTF-8):	Narzędzie do wydobywania filmów z YouTube
 Name:		youtube-dl
 Version:	%{ver}
-Release:	4
+Release:	1
 Epoch:		2
 License:	Public Domain
 Group:		Applications/System
 Source0:	http://youtube-dl.org/downloads/%{verlong}/%{name}-%{verlong}.tar.gz
-# Source0-md5:	42324b60cdcaf818c26ce9e4d3d0ea43
+# Source0-md5:	d801bedd2da58489c2b89169cc37a617
 Source1:	%{name}.conf
 URL:		http://youtube-dl.org/
 BuildRequires:	python-setuptools
 BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.219
-BuildConflicts:	python-distribute < 0.7
 Requires:	python-pyxattr >= 0.5.0
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
