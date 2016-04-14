@@ -1,5 +1,5 @@
 # full version number as seen on youtube-dl website
-%define	verlong	2016.03.06
+%define	verlong	2016.04.13
 
 # transform version so we don't have to bump epoch after four digit upgrades:
 # 2013.01.17.1 becomes 20130117_1
@@ -16,7 +16,7 @@ Epoch:		2
 License:	Public Domain
 Group:		Applications/System
 Source0:	http://youtube-dl.org/downloads/%{verlong}/%{name}-%{verlong}.tar.gz
-# Source0-md5:	16f2b337c9adcec228c15a24c3dbc6b0
+# Source0-md5:	a0d719543e849c5c374f6a7b028575e7
 Source1:	%{name}.conf
 URL:		http://youtube-dl.org/
 BuildRequires:	python-setuptools
@@ -28,6 +28,7 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		bash_compdir	%{_datadir}/bash-completion/completions
 %define		fish_compdir	%{_datadir}/fish/completions
+%define		zsh_compdir	%{_datadir}/zsh/site-functions
 
 %description
 youtube-dl is a small command-line program to download videos from
@@ -62,6 +63,19 @@ Fish completion for youtube-dl command.
 %description -n fish-completion-%{name} -l pl.UTF-8
 Dopełnianie parametrów w fish dla polecenia youtube-dl.
 
+%package -n zsh-completion-%{name}
+Summary:	Zsh completion for youtube-dl command
+Summary(pl.UTF-8):	Dopełnianie parametrów w zsh dla polecenia youtube-dl
+Group:		Applications/Shells
+Requires:	%{name} = %{epoch}:%{version}-%{release}
+Requires:	zsh
+
+%description -n zsh-completion-%{name}
+Zsh completion for youtube-dl command.
+
+%description -n zsh-completion-%{name} -l pl.UTF-8
+Dopełnianie parametrów w zsh dla polecenia youtube-dl.
+
 %prep
 %setup -qc
 mv %{name} .tmp; mv .tmp/* .
@@ -77,11 +91,12 @@ rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT%{_sysconfdir}
 cp -p %{SOURCE1} $RPM_BUILD_ROOT%{_sysconfdir}
 
-install -d $RPM_BUILD_ROOT{%{bash_compdir},%{fish_compdir}}
+install -d $RPM_BUILD_ROOT{%{bash_compdir},%{fish_compdir},%{zsh_compdir}}
 %{__mv} $RPM_BUILD_ROOT%{_prefix}/etc/bash_completion.d/youtube-dl.bash-completion \
 	$RPM_BUILD_ROOT%{bash_compdir}/%{name}
 %{__mv} $RPM_BUILD_ROOT%{_prefix}/etc/fish/completions/youtube-dl.fish \
 	$RPM_BUILD_ROOT%{fish_compdir}/%{name}.fish
+cp -p youtube-dl.zsh $RPM_BUILD_ROOT%{zsh_compdir}/_youtube-dl
 %{__rm} -r $RPM_BUILD_ROOT%{_docdir}/youtube_dl
 
 %clean
@@ -103,3 +118,7 @@ rm -rf $RPM_BUILD_ROOT
 %files -n fish-completion-%{name}
 %defattr(644,root,root,755)
 %{fish_compdir}/%{name}.fish
+
+%files -n zsh-completion-%{name}
+%defattr(644,root,root,755)
+%{zsh_compdir}/_youtube-dl
