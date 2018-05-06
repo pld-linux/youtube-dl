@@ -1,5 +1,5 @@
 # full version number as seen on youtube-dl website
-%define	verlong	2018.04.03
+%define	verlong	2018.05.01
 
 # transform version so we don't have to bump epoch after four digit upgrades:
 # 2013.01.17.1 becomes 20130117_1
@@ -16,7 +16,7 @@ Epoch:		2
 License:	Public Domain
 Group:		Applications/System
 Source0:	http://youtube-dl.org/downloads/%{verlong}/%{name}-%{verlong}.tar.gz
-# Source0-md5:	8357a2c1497a37063409bdcc27c4365c
+# Source0-md5:	2e8a164c9e3fca74544306e14438ffcf
 Source1:	%{name}.conf
 # should be downloaded from:
 # https://github.com/rg3/youtube-dl/pull/10291.diff
