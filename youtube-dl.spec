@@ -33,9 +33,6 @@ Suggests:	ffmpeg
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
-%define		bash_compdir	%{_datadir}/bash-completion/completions
-%define		zsh_compdir	%{_datadir}/zsh/site-functions
-
 %description
 youtube-dl is a small command-line program to download videos from
 YouTube.com.
