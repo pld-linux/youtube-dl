@@ -26,7 +26,7 @@ Patch0:		10291.diff
 URL:		http://youtube-dl.org/
 BuildRequires:	python-setuptools
 BuildRequires:	rpm-pythonprov
-BuildRequires:	rpmbuild(macros) >= 1.713
+BuildRequires:	rpmbuild(macros) >= 1.720
 Requires:	python-pyxattr >= 0.5.0
 Requires:	python-setuptools
 Suggests:	ffmpeg
@@ -34,7 +34,6 @@ BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		bash_compdir	%{_datadir}/bash-completion/completions
-%define		fish_compdir	%{_datadir}/fish/completions
 %define		zsh_compdir	%{_datadir}/zsh/site-functions
 
 %description
