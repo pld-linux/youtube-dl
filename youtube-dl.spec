@@ -29,6 +29,7 @@ BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.713
 Requires:	python-pyxattr >= 0.5.0
 Requires:	python-setuptools
+Suggests:	ffmpeg
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
