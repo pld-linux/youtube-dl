@@ -25,10 +25,11 @@ Source1:	%{name}.conf
 Patch0:		10291.diff
 URL:		http://youtube-dl.org/
 BuildRequires:	python-setuptools
+BuildRequires:	python3-setuptools
 BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.720
-Requires:	python-pyxattr >= 0.5.0
 Requires:	python-setuptools
+Requires:	python-%{name} = %{epoch}:%{version}-%{release}
 Suggests:	ffmpeg
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -66,6 +67,31 @@ Fish completion for youtube-dl command.
 %description -n fish-completion-%{name} -l pl.UTF-8
 Dopełnianie parametrów w fish dla polecenia youtube-dl.
 
+%package -n python-%{name}
+Summary:	Video extraction utility for YouTube
+Summary(pl.UTF-8):	Narzędzie do wydobywania filmów z YouTube
+Group:		Libraries/Python
+Requires:	python-pyxattr >= 0.5.0
+
+%description -n python-%{name}
+youtube-dl is a small command-line program to download videos from
+YouTube.com.
+
+%description -n python-%{name} -l pl.UTF-8
+youtube-dl jest programem do ściągania plików video z YouTube.com.
+
+%package -n python3-%{name}
+Summary:	Video extraction utility for YouTube
+Summary(pl.UTF-8):	Narzędzie do wydobywania filmów z YouTube
+Group:		Libraries/Python
+
+%description -n python3-%{name}
+youtube-dl is a small command-line program to download videos from
+YouTube.com.
+
+%description -n python3-%{name} -l pl.UTF-8
+youtube-dl jest programem do ściągania plików video z YouTube.com.
+
 %package -n zsh-completion-%{name}
 Summary:	Zsh completion for youtube-dl command
 Summary(pl.UTF-8):	Dopełnianie parametrów w zsh dla polecenia youtube-dl
@@ -86,9 +112,11 @@ mv %{name} .tmp; mv .tmp/* .
 
 %build
 %py_build
+%py3_build
 
 %install
 rm -rf $RPM_BUILD_ROOT
+%py3_install
 %py_install
 %py_postclean
 
@@ -112,8 +140,6 @@ rm -rf $RPM_BUILD_ROOT
 %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/youtube-dl.conf
 %attr(755,root,root) %{_bindir}/youtube-dl
 %{_mandir}/man1/youtube-dl.1*
-%{py_sitescriptdir}/youtube_dl
-%{py_sitescriptdir}/youtube_dl-*-py*.egg-info
 
 %files -n bash-completion-%{name}
 %defattr(644,root,root,755)
@@ -122,6 +148,16 @@ rm -rf $RPM_BUILD_ROOT
 %files -n fish-completion-%{name}
 %defattr(644,root,root,755)
 %{fish_compdir}/%{name}.fish
+
+%files -n python-%{name}
+%defattr(644,root,root,755)
+%{py_sitescriptdir}/youtube_dl
+%{py_sitescriptdir}/youtube_dl-*-py*.egg-info
+
+%files -n python3-%{name}
+%defattr(644,root,root,755)
+%{py3_sitescriptdir}/youtube_dl
+%{py3_sitescriptdir}/youtube_dl-*-py*.egg-info
 
 %files -n zsh-completion-%{name}
 %defattr(644,root,root,755)
