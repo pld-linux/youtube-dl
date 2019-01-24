@@ -1,3 +1,7 @@
+#
+# Conditional build:
+%bcond_without	python3	# CPython 3.x module
+
 # full version number as seen on youtube-dl website
 %define	verlong	2019.01.24
 
@@ -24,8 +28,12 @@ Source1:	%{name}.conf
 # git log -p --reverse pr/10291~3..pr/10291
 Patch0:		10291.diff
 URL:		http://youtube-dl.org/
+BuildRequires:	python-modules >= 1:2.6
 BuildRequires:	python-setuptools
+%if %{with python3}
+BuildRequires:	python3-modules >= 1:3.2
 BuildRequires:	python3-setuptools
+%endif
 BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.720
 Requires:	python-setuptools
@@ -68,29 +76,28 @@ Fish completion for youtube-dl command.
 Dopełnianie parametrów w fish dla polecenia youtube-dl.
 
 %package -n python-%{name}
-Summary:	Video extraction utility for YouTube
-Summary(pl.UTF-8):	Narzędzie do wydobywania filmów z YouTube
+Summary:	Python 2 video extraction utility for YouTube
+Summary(pl.UTF-8):	Narzędzie do wydobywania filmów z YouTube dla Pythona 2
 Group:		Libraries/Python
 Requires:	python-pyxattr >= 0.5.0
 
 %description -n python-%{name}
-youtube-dl is a small command-line program to download videos from
-YouTube.com.
+Python 2 video extraction utility for YouTube.
 
 %description -n python-%{name} -l pl.UTF-8
-youtube-dl jest programem do ściągania plików video z YouTube.com.
+Narzędzie do wydobywania filmów z YouTube dla Pythona 2.
 
 %package -n python3-%{name}
-Summary:	Video extraction utility for YouTube
-Summary(pl.UTF-8):	Narzędzie do wydobywania filmów z YouTube
+Summary:	Python 3 video extraction utility for YouTube
+Summary(pl.UTF-8):	Narzędzie do wydobywania filmów z YouTube dla Pythona 3
 Group:		Libraries/Python
+Requires:	python3-pyxattr >= 0.5.0
 
 %description -n python3-%{name}
-youtube-dl is a small command-line program to download videos from
-YouTube.com.
+Python 3 video extraction utility for YouTube.
 
 %description -n python3-%{name} -l pl.UTF-8
-youtube-dl jest programem do ściągania plików video z YouTube.com.
+Narzędzie do wydobywania filmów z YouTube dla Pythona 3.
 
 %package -n zsh-completion-%{name}
 Summary:	Zsh completion for youtube-dl command
@@ -107,16 +114,23 @@ Dopełnianie parametrów w zsh dla polecenia youtube-dl.
 
 %prep
 %setup -qc
-mv %{name} .tmp; mv .tmp/* .
+%{__mv} %{name} .tmp; %{__mv} .tmp/* .
 %patch0 -p1
 
 %build
 %py_build
+
+%if %{with python3}
 %py3_build
+%endif
 
 %install
 rm -rf $RPM_BUILD_ROOT
+
+%if %{with python3}
 %py3_install
+%endif
+
 %py_install
 %py_postclean
 
@@ -154,10 +168,12 @@ rm -rf $RPM_BUILD_ROOT
 %{py_sitescriptdir}/youtube_dl
 %{py_sitescriptdir}/youtube_dl-*-py*.egg-info
 
+%if %{with python3}
 %files -n python3-%{name}
 %defattr(644,root,root,755)
 %{py3_sitescriptdir}/youtube_dl
 %{py3_sitescriptdir}/youtube_dl-*-py*.egg-info
+%endif
 
 %files -n zsh-completion-%{name}
 %defattr(644,root,root,755)
