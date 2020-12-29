@@ -9,9 +9,9 @@ index 387230be0..9c9d0f829 100644
 --- a/youtube_dl/extractor/extractors.py
 +++ b/youtube_dl/extractor/extractors.py
 @@ -491,6 +491,7 @@ from .jpopsukitv import JpopsukiIE
+ from .jwplatform import JWPlatformIE
  from .kakao import KakaoIE
  from .kaltura import KalturaIE
- from .kanalplay import KanalPlayIE
 +from .kanal2 import Kanal2IE
  from .kankan import KankanIE
  from .karaoketv import KaraoketvIE
