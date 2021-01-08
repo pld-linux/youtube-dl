@@ -1,6 +1,6 @@
 #
 # Conditional build:
-%bcond_without	python3	# CPython 3.x module
+%bcond_without	python2	# CPython 2.x module
 
 # full version number as seen on youtube-dl website
 %define	verlong	2020.12.29
@@ -28,16 +28,16 @@ Source1:	%{name}.conf
 # git log -p --reverse pr/10291~3..pr/10291
 Patch0:		10291.diff
 URL:		http://youtube-dl.org/
+%if %{with python2}
 BuildRequires:	python-modules >= 1:2.6
 BuildRequires:	python-setuptools
-%if %{with python3}
+%endif
 BuildRequires:	python3-modules >= 1:3.2
 BuildRequires:	python3-setuptools
-%endif
 BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.720
-Requires:	python-setuptools
-Requires:	python-%{name} = %{epoch}:%{version}-%{release}
+Requires:	python3-setuptools
+Requires:	python3-%{name} = %{epoch}:%{version}-%{release}
 Suggests:	ffmpeg
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -118,21 +118,21 @@ Dopełnianie parametrów w zsh dla polecenia youtube-dl.
 %patch0 -p1
 
 %build
+%if %{with python2}
 %py_build
-
-%if %{with python3}
-%py3_build
 %endif
+
+%py3_build
 
 %install
 rm -rf $RPM_BUILD_ROOT
 
-%if %{with python3}
-%py3_install
-%endif
-
+%if %{with python2}
 %py_install
 %py_postclean
+%endif
+
+%py3_install
 
 install -d $RPM_BUILD_ROOT%{_sysconfdir}
 cp -p %{SOURCE1} $RPM_BUILD_ROOT%{_sysconfdir}
@@ -163,17 +163,17 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %{fish_compdir}/%{name}.fish
 
+%if %{with python2}
 %files -n python-%{name}
 %defattr(644,root,root,755)
 %{py_sitescriptdir}/youtube_dl
 %{py_sitescriptdir}/youtube_dl-*-py*.egg-info
+%endif
 
-%if %{with python3}
 %files -n python3-%{name}
 %defattr(644,root,root,755)
 %{py3_sitescriptdir}/youtube_dl
 %{py3_sitescriptdir}/youtube_dl-*-py*.egg-info
-%endif
 
 %files -n zsh-completion-%{name}
 %defattr(644,root,root,755)
