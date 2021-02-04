@@ -3,7 +3,7 @@
 %bcond_without	python2	# CPython 2.x module
 
 # full version number as seen on youtube-dl website
-%define	verlong	2021.01.08
+%define	verlong	2021.02.04
 
 # transform version so we don't have to bump epoch after four digit upgrades:
 # 2013.01.17.1 becomes 20130117_1
@@ -20,7 +20,7 @@ Epoch:		2
 License:	Public Domain
 Group:		Applications/System
 Source0:	http://youtube-dl.org/downloads/%{verlong}/%{name}-%{verlong}.tar.gz
-# Source0-md5:	827049d54f80a8c3c1cacb42abb8dd99
+# Source0-md5:	a6d6da278fcb8b70104727c1e27ee300
 Source1:	%{name}.conf
 # should be downloaded from:
 # https://github.com/rg3/youtube-dl/pull/10291.diff
