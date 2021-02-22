@@ -19,7 +19,7 @@ Release:	1
 Epoch:		2
 License:	Public Domain
 Group:		Applications/System
-Source0:	http://youtube-dl.org/downloads/%{verlong}/%{name}-%{verlong}.tar.gz
+Source0:	https://youtube-dl.org/downloads/%{verlong}/%{name}-%{verlong}.tar.gz
 # Source0-md5:	a9136b338055166a233a753e149095f6
 Source1:	%{name}.conf
 # should be downloaded from:
