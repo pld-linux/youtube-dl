@@ -1,0 +1,12 @@
+# based on https://github.com/ytdl-org/youtube-dl/issues/31530#issuecomment-1433470254
+--- youtube_dl/extractor/youtube.py~	2021-12-16 19:47:24.000000000 +0100
++++ youtube_dl/extractor/youtube.py	2023-02-22 14:55:31.317701423 +0100
+@@ -1791,7 +1791,7 @@
+                 microformat.get('uploadDate')
+                 or search_meta('uploadDate')),
+             'uploader': video_details['author'],
+-            'uploader_id': self._search_regex(r'/(?:channel|user)/([^/?&#]+)', owner_profile_url, 'uploader id') if owner_profile_url else None,
++            'uploader_id': self._search_regex(r'/(?:channel/|user/|@)([^/?&#]+)', owner_profile_url, 'uploader id', default=None) if owner_profile_url else None,
+             'uploader_url': owner_profile_url,
+             'channel_id': channel_id,
+             'channel_url': 'https://www.youtube.com/channel/' + channel_id if channel_id else None,
