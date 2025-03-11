@@ -116,8 +116,8 @@ Dopełnianie parametrów w zsh dla polecenia youtube-dl.
 %prep
 %setup -qc
 %{__mv} %{name} .tmp; %{__mv} .tmp/* .
-%patch0 -p1
-%patch1 -p0
+%patch -P 0 -p1
+%patch -P 1 -p0
 
 %build
 %if %{with python2}
